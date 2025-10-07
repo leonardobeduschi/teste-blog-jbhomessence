@@ -502,7 +502,12 @@ if (window.location.pathname.includes("/blog/index.html") || window.location.pat
 
 // POST.JS //
 if (window.location.pathname.includes("/blog/post.html")) {
-  fetch("../blog/posts.json")
+  // Base URL dinâmica
+  const baseURL =
+    window.location.origin +
+    window.location.pathname.replace(/\/[^/]*$/, "");
+
+  fetch(`${baseURL}/posts.json`)
     .then((res) => res.json())
     .then((posts) => {
       const params = new URLSearchParams(window.location.search);
@@ -602,4 +607,5 @@ if (window.location.pathname.includes("/blog/post.html")) {
     })
     .catch((err) => console.error("Erro ao carregar post:", err));
 }
+
 
